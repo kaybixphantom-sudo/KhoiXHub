@@ -1,0 +1,210 @@
+local _ok, _err = pcall(function()
+if not game:IsLoaded() then game.Loaded:Wait() end
+task.wait(0.5)
+local PL = game:GetService("Players")
+local SG_svc = game:GetService("StarterGui")
+local LP = PL.LocalPlayer
+if not LP then repeat task.wait() until PL.LocalPlayer; LP = PL.LocalPlayer end
+local CG = LP:WaitForChild("PlayerGui", 10)
+if not CG then
+repeat task.wait() until LP:FindFirstChildOfClass("PlayerGui")
+CG = LP:FindFirstChildOfClass("PlayerGui")
+end
+for _, n in ipairs({"KhoiKeyUI", "KhoiFastUI", "KhoiMainUI"}) do
+local o = CG:FindFirstChild(n)
+if o then pcall(function() o:Destroy() end) end
+end
+local KEY = "KhoiFarmVIP"
+local FARM_URL = "https://raw.githubusercontent.com/kaybixphantom-sudo/KhoiHub/refs/heads/main/MusFast"
+local MAIN_URL = "https://raw.githubusercontent.com/kaybixphantom-sudo/KhoiHub/refs/heads/main/MusMain"
+local function Notify(t)
+pcall(function()
+SG_svc:SetCore("SendNotification", {Title="KhoiHub", Text=tostring(t), Duration=3})
+end)
+end
+local SG = Instance.new("ScreenGui")
+SG.Name = "KhoiKeyUI"
+SG.ResetOnSpawn = false
+SG.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+SG.DisplayOrder = 1000
+SG.Parent = CG
+local Main = Instance.new("Frame", SG)
+Main.Size = UDim2.new(0, 340, 0, 200)
+Main.Position = UDim2.new(0.5, -170, 0.5, -100)
+Main.BackgroundColor3 = Color3.fromRGB(15,15,15)
+Main.BorderSizePixel = 0
+Main.Active = true
+Instance.new("UICorner", Main).CornerRadius = UDim.new(0,10)
+local MS = Instance.new("UIStroke", Main)
+MS.Color = Color3.fromRGB(255,80,0); MS.Thickness = 2
+local Title = Instance.new("TextLabel", Main)
+Title.Size = UDim2.new(1, -20, 0, 40)
+Title.Position = UDim2.new(0, 10, 0, 10)
+Title.BackgroundColor3 = Color3.fromRGB(30,10,0)
+Title.Text = "KhoiHub Key"
+Title.TextColor3 = Color3.fromRGB(255,100,0)
+Title.Font = Enum.Font.GothamBold
+Title.TextSize = 20
+Instance.new("UICorner", Title).CornerRadius = UDim.new(0,10)
+local Box = Instance.new("TextBox", Main)
+Box.Size = UDim2.new(1, -40, 0, 40)
+Box.Position = UDim2.new(0, 20, 0, 65)
+Box.BackgroundColor3 = Color3.fromRGB(25,25,25)
+Box.Text = ""
+Box.PlaceholderText = "Nhap key..."
+Box.TextColor3 = Color3.fromRGB(255,255,255)
+Box.PlaceholderColor3 = Color3.fromRGB(120,120,120)
+Box.Font = Enum.Font.Gotham
+Box.TextSize = 16
+Box.BorderSizePixel = 0
+Box.ClearTextOnFocus = false
+Instance.new("UICorner", Box).CornerRadius = UDim.new(0,8)
+local Status = Instance.new("TextLabel", Main)
+Status.Size = UDim2.new(1, -40, 0, 20)
+Status.Position = UDim2.new(0, 20, 0, 110)
+Status.BackgroundTransparency = 1
+Status.Text = ""
+Status.TextColor3 = Color3.fromRGB(255,80,80)
+Status.Font = Enum.Font.Gotham
+Status.TextSize = 14
+local Submit = Instance.new("TextButton", Main)
+Submit.Size = UDim2.new(1, -40, 0, 40)
+Submit.Position = UDim2.new(0, 20, 0, 140)
+Submit.BackgroundColor3 = Color3.fromRGB(200,60,0)
+Submit.Text = "XAC NHAN"
+Submit.TextColor3 = Color3.fromRGB(255,255,255)
+Submit.Font = Enum.Font.GothamBold
+Submit.TextSize = 16
+Submit.BorderSizePixel = 0
+Instance.new("UICorner", Submit).CornerRadius = UDim.new(0,8)
+local function buildMenu()
+SG:Destroy()
+local SG2 = Instance.new("ScreenGui")
+SG2.Name = "KhoiKeyUI"
+SG2.ResetOnSpawn = false
+SG2.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+SG2.DisplayOrder = 1000
+SG2.Parent = CG
+local M = Instance.new("Frame", SG2)
+M.Size = UDim2.new(0, 340, 0, 240)
+M.Position = UDim2.new(0.5, -170, 0.5, -120)
+M.BackgroundColor3 = Color3.fromRGB(15,15,15)
+M.BorderSizePixel = 0
+M.Active = true
+Instance.new("UICorner", M).CornerRadius = UDim.new(0,10)
+local MS2 = Instance.new("UIStroke", M)
+MS2.Color = Color3.fromRGB(255,80,0); MS2.Thickness = 2
+local T = Instance.new("TextLabel", M)
+T.Size = UDim2.new(1, -20, 0, 40)
+T.Position = UDim2.new(0, 10, 0, 10)
+T.BackgroundColor3 = Color3.fromRGB(30,10,0)
+T.Text = "KhoiHub Menu"
+T.TextColor3 = Color3.fromRGB(255,100,0)
+T.Font = Enum.Font.GothamBold
+T.TextSize = 20
+Instance.new("UICorner", T).CornerRadius = UDim.new(0,10)
+local Info = Instance.new("TextLabel", M)
+Info.Size = UDim2.new(1, -40, 0, 20)
+Info.Position = UDim2.new(0, 20, 0, 55)
+Info.BackgroundTransparency = 1
+Info.Text = "Chon che do:"
+Info.TextColor3 = Color3.fromRGB(200,200,200)
+Info.Font = Enum.Font.Gotham
+Info.TextSize = 14
+local FarmBtn = Instance.new("TextButton", M)
+FarmBtn.Size = UDim2.new(1, -40, 0, 55)
+FarmBtn.Position = UDim2.new(0, 20, 0, 85)
+FarmBtn.BackgroundColor3 = Color3.fromRGB(80,0,0)
+FarmBtn.Text = "FARM (MusFast)"
+FarmBtn.TextColor3 = Color3.fromRGB(255,255,255)
+FarmBtn.Font = Enum.Font.GothamBold
+FarmBtn.TextSize = 16
+FarmBtn.BorderSizePixel = 0
+Instance.new("UICorner", FarmBtn).CornerRadius = UDim.new(0,8)
+local MainBtn = Instance.new("TextButton", M)
+MainBtn.Size = UDim2.new(1, -40, 0, 55)
+MainBtn.Position = UDim2.new(0, 20, 0, 150)
+MainBtn.BackgroundColor3 = Color3.fromRGB(80,0,0)
+MainBtn.Text = "MAIN (MusMain)"
+MainBtn.TextColor3 = Color3.fromRGB(255,255,255)
+MainBtn.Font = Enum.Font.GothamBold
+MainBtn.TextSize = 16
+MainBtn.BorderSizePixel = 0
+Instance.new("UICorner", MainBtn).CornerRadius = UDim.new(0,8)
+local XBtn = Instance.new("TextButton", M)
+XBtn.Size = UDim2.new(0, 30, 0, 30)
+XBtn.Position = UDim2.new(1, -35, 0, 5)
+XBtn.BackgroundColor3 = Color3.fromRGB(150,0,0)
+XBtn.Text = "X"
+XBtn.TextColor3 = Color3.fromRGB(255,255,255)
+XBtn.Font = Enum.Font.GothamBold
+XBtn.TextSize = 14
+XBtn.BorderSizePixel = 0
+XBtn.ZIndex = 10
+Instance.new("UICorner", XBtn).CornerRadius = UDim.new(0,6)
+XBtn.MouseButton1Click:Connect(function()
+SG2:Destroy()
+Notify("Da dong menu.")
+end)
+FarmBtn.MouseButton1Click:Connect(function()
+FarmBtn.BackgroundColor3 = Color3.fromRGB(0,150,0)
+FarmBtn.Text = "KHOISCRIPT | FARMING LOADING"
+task.spawn(function()
+local ok, err = pcall(function()
+loadstring(game:HttpGet(FARM_URL))()
+end)
+if ok then
+FarmBtn.Text = "KHOISCRIPT | FARMING LOADING THANH CONG"
+Notify("MusFast da load thanh cong!")
+task.wait(1.5)
+SG2:Destroy()
+else
+FarmBtn.BackgroundColor3 = Color3.fromRGB(80,0,0)
+FarmBtn.Text = "FARM (MusFast)"
+Notify("Loi MusFast: " .. tostring(err))
+end
+end)
+end)
+MainBtn.MouseButton1Click:Connect(function()
+MainBtn.BackgroundColor3 = Color3.fromRGB(0,150,0)
+MainBtn.Text = "KHOISCRIPT | MAIN LOADING"
+task.spawn(function()
+local ok, err = pcall(function()
+loadstring(game:HttpGet(MAIN_URL))()
+end)
+if ok then
+MainBtn.Text = "KHOISCRIPT | MAIN LOADING THANH CONG"
+Notify("MusMain da load thanh cong!")
+task.wait(1.5)
+SG2:Destroy()
+else
+MainBtn.BackgroundColor3 = Color3.fromRGB(80,0,0)
+MainBtn.Text = "MAIN (MusMain)"
+Notify("Loi MusMain: " .. tostring(err))
+end
+end)
+end)
+end
+Submit.MouseButton1Click:Connect(function()
+local entered = Box.Text
+if entered == KEY then
+Status.TextColor3 = Color3.fromRGB(0,255,100)
+Status.Text = "Key dung!"
+task.wait(0.6)
+buildMenu()
+else
+Status.TextColor3 = Color3.fromRGB(255,80,80)
+Status.Text = "Key sai!"
+Box.Text = ""
+end
+end)
+Box.FocusLost:Connect(function(enter)
+if enter then
+Submit:Fire()
+end
+end)
+Notify("Nhap key de mo KhoiHub.")
+end)
+if not _ok then
+warn("[KhoiKey ERROR] " .. tostring(_err))
+end

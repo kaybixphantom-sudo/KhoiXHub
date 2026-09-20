@@ -15,11 +15,12 @@ local o = CG:FindFirstChild(n)
 if o then pcall(function() o:Destroy() end) end
 end
 local KEY = "KhoiFarmVIP"
+local DISCORD_URL = "https://discord.gg/3gGHr54hb"
 local FARM_URL = "https://raw.githubusercontent.com/kaybixphantom-sudo/KhoiHub/refs/heads/main/MusFast"
 local MAIN_URL = "https://raw.githubusercontent.com/kaybixphantom-sudo/KhoiHub/refs/heads/main/MusMain"
 local function Notify(t)
 pcall(function()
-SG_svc:SetCore("SendNotification", {Title="KhoiHub", Text=tostring(t), Duration=3})
+SG_svc:SetCore("SendNotification", {Title="KhoiHub", Text=tostring(t), Duration=4})
 end)
 end
 local SG = Instance.new("ScreenGui")
@@ -29,8 +30,8 @@ SG.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 SG.DisplayOrder = 1000
 SG.Parent = CG
 local Main = Instance.new("Frame", SG)
-Main.Size = UDim2.new(0, 340, 0, 200)
-Main.Position = UDim2.new(0.5, -170, 0.5, -100)
+Main.Size = UDim2.new(0, 360, 0, 280)
+Main.Position = UDim2.new(0.5, -180, 0.5, -140)
 Main.BackgroundColor3 = Color3.fromRGB(15,15,15)
 Main.BorderSizePixel = 0
 Main.Active = true
@@ -46,9 +47,35 @@ Title.TextColor3 = Color3.fromRGB(255,100,0)
 Title.Font = Enum.Font.GothamBold
 Title.TextSize = 20
 Instance.new("UICorner", Title).CornerRadius = UDim.new(0,10)
+local Hint = Instance.new("TextLabel", Main)
+Hint.Size = UDim2.new(1, -20, 0, 20)
+Hint.Position = UDim2.new(0, 10, 0, 55)
+Hint.BackgroundTransparency = 1
+Hint.Text = "Lay key tai Discord ben duoi"
+Hint.TextColor3 = Color3.fromRGB(255,180,100)
+Hint.Font = Enum.Font.Gotham
+Hint.TextSize = 13
+local DiscordBtn = Instance.new("TextButton", Main)
+DiscordBtn.Size = UDim2.new(1, -40, 0, 40)
+DiscordBtn.Position = UDim2.new(0, 20, 0, 78)
+DiscordBtn.BackgroundColor3 = Color3.fromRGB(88,101,242)
+DiscordBtn.Text = "JOIN DISCORD - LAY KEY"
+DiscordBtn.TextColor3 = Color3.fromRGB(255,255,255)
+DiscordBtn.Font = Enum.Font.GothamBold
+DiscordBtn.TextSize = 15
+DiscordBtn.BorderSizePixel = 0
+Instance.new("UICorner", DiscordBtn).CornerRadius = UDim.new(0,8)
+local CopyNote = Instance.new("TextLabel", Main)
+CopyNote.Size = UDim2.new(1, -20, 0, 16)
+CopyNote.Position = UDim2.new(0, 10, 0, 121)
+CopyNote.BackgroundTransparency = 1
+CopyNote.Text = ""
+CopyNote.TextColor3 = Color3.fromRGB(0,255,120)
+CopyNote.Font = Enum.Font.Gotham
+CopyNote.TextSize = 12
 local Box = Instance.new("TextBox", Main)
 Box.Size = UDim2.new(1, -40, 0, 40)
-Box.Position = UDim2.new(0, 20, 0, 65)
+Box.Position = UDim2.new(0, 20, 0, 140)
 Box.BackgroundColor3 = Color3.fromRGB(25,25,25)
 Box.Text = ""
 Box.PlaceholderText = "Nhap key..."
@@ -61,15 +88,15 @@ Box.ClearTextOnFocus = false
 Instance.new("UICorner", Box).CornerRadius = UDim.new(0,8)
 local Status = Instance.new("TextLabel", Main)
 Status.Size = UDim2.new(1, -40, 0, 20)
-Status.Position = UDim2.new(0, 20, 0, 110)
+Status.Position = UDim2.new(0, 20, 0, 185)
 Status.BackgroundTransparency = 1
 Status.Text = ""
 Status.TextColor3 = Color3.fromRGB(255,80,80)
 Status.Font = Enum.Font.Gotham
 Status.TextSize = 14
 local Submit = Instance.new("TextButton", Main)
-Submit.Size = UDim2.new(1, -40, 0, 40)
-Submit.Position = UDim2.new(0, 20, 0, 140)
+Submit.Size = UDim2.new(1, -40, 0, 45)
+Submit.Position = UDim2.new(0, 20, 0, 215)
 Submit.BackgroundColor3 = Color3.fromRGB(200,60,0)
 Submit.Text = "XAC NHAN"
 Submit.TextColor3 = Color3.fromRGB(255,255,255)
@@ -77,6 +104,15 @@ Submit.Font = Enum.Font.GothamBold
 Submit.TextSize = 16
 Submit.BorderSizePixel = 0
 Instance.new("UICorner", Submit).CornerRadius = UDim.new(0,8)
+DiscordBtn.MouseButton1Click:Connect(function()
+local copied = pcall(function() setclipboard(DISCORD_URL) end)
+if copied then
+CopyNote.Text = "Da copy link Discord vao clipboard!"
+else
+CopyNote.Text = DISCORD_URL
+end
+Notify("Link Discord: " .. DISCORD_URL)
+end)
 local function buildMenu()
 SG:Destroy()
 local SG2 = Instance.new("ScreenGui")
@@ -194,7 +230,7 @@ task.wait(0.6)
 buildMenu()
 else
 Status.TextColor3 = Color3.fromRGB(255,80,80)
-Status.Text = "Key sai!"
+Status.Text = "Key sai! Vao Discord de lay key."
 Box.Text = ""
 end
 end)
@@ -203,7 +239,7 @@ if enter then
 Submit:Fire()
 end
 end)
-Notify("Nhap key de mo KhoiHub.")
+Notify("Vao Discord de lay key!")
 end)
 if not _ok then
 warn("[KhoiKey ERROR] " .. tostring(_err))
